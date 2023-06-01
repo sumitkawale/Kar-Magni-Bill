@@ -1,0 +1,73 @@
+.dataTable {
+    text-align     : center;
+    width          : 99%;
+    border-collapse: separate;
+    border-spacing : 0;
+    margin         : 0 auto;
+    overflow-x     : auto;
+}
+
+.dataTable thead {
+    border-bottom: 2px solid black;
+    background   : rgb(237, 247, 255);
+    color        : black;
+    position     : sticky;
+    top          : -1px;
+    box-shadow   : 0 5px 10px #00000044;
+}
+
+.dataTable thead .dataTable thead th {
+    border-width: 2px;
+}
+
+.dataTable thead tr th,
+.dataTable tbody tr td {
+    padding: 7px 3px;
+}
+
+.dataTable tbody tr:hover {
+    background: #efefef;
+    cursor    : pointer;
+}
+
+.dataTable .msg {
+    padding-top   : 2.5rem;
+    padding-bottom: 2rem;
+}
+
+.loader-td {
+    background-color: rgb(255, 255, 255);
+}
+
+.loader {
+    border           : 16px solid #3676f52a;
+    border-radius    : 50%;
+    border-top       : 16px solid #3676f5;
+    width            : 80px;
+    height           : 80px;
+    margin           : 0 auto;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation        : spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
