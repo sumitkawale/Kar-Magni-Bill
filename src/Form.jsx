@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as XLSX from 'xlsx'
 import "./Form.css"
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Form() {
     const [data, updateData] = useState(JSON.parse(localStorage.getItem("tableData")) || [])
@@ -62,7 +62,12 @@ export default function Form() {
 
 
     return <>
-        <form><input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} id='fileInput' /><button type='reset' onClick={() => { localStorage.removeItem("tableData"); updateData([]) }}>reset</button></form>
+        <form>
+            <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} id='fileInput' />
+            <button type='reset' onClick={() => { localStorage.removeItem("tableData"); updateData([]) }}>reset</button>
+            <hr />
+            <Link to={"/print/all"}><button style={{ padding: "10px 20px" }}>Print All</button></Link>
+        </form>
         <br />
         <hr />
         <br />
