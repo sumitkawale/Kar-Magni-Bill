@@ -60,9 +60,12 @@ export default function Form() {
         }
     }
 
+
     return <>
-        <form><input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} id='fileInput' /><button type='reset' onClick={() => localStorage.removeItem("tableData")}>reset</button></form>
-        <br /><hr /><br />
+        <form><input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} id='fileInput' /><button type='reset' onClick={() => { localStorage.removeItem("tableData"); updateData([]) }}>reset</button></form>
+        <br />
+        <hr />
+        <br />
         <table border={1} className='dataTable'>
             <thead>
                 <tr>

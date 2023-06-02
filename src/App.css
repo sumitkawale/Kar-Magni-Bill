@@ -24,7 +24,7 @@
 
 .billBody {
     border: 2px solid gray;
-    height: 43rem;
+    height: 44rem;
     width : 100%;
 }
 
@@ -63,7 +63,8 @@
 }
 
 .billBody table thead tr th {
-    border      : 1.5px solid black;
+    border          : 1.5px solid black;
+    font-size       : 0.8rem;
     /* text-align   : start; */
 }
 
@@ -71,7 +72,7 @@
     border-top   : 1px solid lightgray;
     border-bottom: 1px solid lightgray;
     text-align   : start;
-    padding : 0 .5rem;
+    padding      : 0 .5rem;
 }
 
 .lastBorder td {
@@ -79,9 +80,9 @@
 }
 
 .billBody table tfoot tr td {
-    border: 1.5px solid black;
-    text-align   : end;
-    padding : 0 .5rem;
+    border    : 1.5px solid black;
+    text-align: end;
+    padding   : 0 .5rem;
 }
 
 /* END OF BILL-BODY */
@@ -200,4 +201,8 @@
 
 .word-spacing-3 {
     word-spacing: 30px;
+}
+
+.text-right {
+    text-align: right !important;
 }
