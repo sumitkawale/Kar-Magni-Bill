@@ -39,7 +39,7 @@ export default function Bill(props) {
             <p className="word-spacing">मुंबई ग्रामपंचायत कायदा १९५८ च्या कलम १२९(१) अन्वये</p>
             <h2 className="text-justify word-spacing">ग्रामपंचायत अनाळा तालुका परांडा यांजकडून</h2>
             <p>श्री./श्रीमती <span>{data[2] || <span style={{ padding: "0 6rem" }}></span>}</span> घर नं. <span>{data[1] || <span className="px-4"></span>}</span> यांस </p>
-            <p className="word-spacing">टॅक्स फी अगर इतर येण्यासंबंधीचा तपशील सन - २०२३ - २०२४ सालाचे</p>
+            <p className="word-spacing">टॅक्स फी अगर इतर येण्यासंबंधीचा तपशील सन - <strong className="english">2023</strong> - <strong className="english">2024</strong> सालाचे</p>
             <table border="1px">
                 <thead>
                     <tr>
