@@ -11,7 +11,7 @@ export default function Form() {
 
     const navigate = useNavigate()
 
-    console.log(data)
+    // console.log(data)
     const decimalPlaces = 3;
 
     function giveFixDecimalsOnly(value) {
@@ -33,7 +33,7 @@ export default function Form() {
         reader.readAsBinaryString(e.target.files[0]);
         reader.onload = (e) => {
             updateWorkbook(XLSX.read(e.target.result, { type: "binary" }));
-            console.log("workbook SheetNames:", workbook.SheetNames)
+            // console.log("workbook SheetNames:", workbook.SheetNames)
         }
     }
 
@@ -42,7 +42,7 @@ export default function Form() {
         const rowData = [...tr.cells].map((cell) => {
             return cell.innerText
         })
-        console.log(rowData)
+        // console.log(rowData)
         if (rowData.length == 19) {
             const data = JSON.stringify(rowData)
             navigate("/print/" + data)
@@ -52,9 +52,9 @@ export default function Form() {
     function sheetChange(event) {
         const sheetName = workbook.SheetNames[event.target.value] || 0;
 
-        console.log("sheetName:", sheetName)
+        // console.log("sheetName:", sheetName)
         const sheet = workbook.Sheets[sheetName];
-        console.log("sheet:", sheet)
+        // console.log("sheet:", sheet)
         const parsedData = XLSX.utils.sheet_to_json(sheet);
 
         let data = parsedData.filter((row) => Object.keys(row).length == 19)
@@ -75,7 +75,7 @@ export default function Form() {
                     <select onChange={sheetChange}>
                         {
                             workbook?.SheetNames?.map((name, index) => {
-                                console.log(name)
+                                {/* console.log(name) */}
                                 return <option key={name} value={index}>{name}</option>
                             })
                         }
@@ -84,7 +84,8 @@ export default function Form() {
             }
             <button type='reset' style={{ margin: "0 2rem" }} onClick={() => { localStorage.removeItem("tableData"); updateData([]) }}>reset</button>
             <hr />
-            <Link to={"/print/all"}><button style={{ padding: "10px 20px" }}>Print All</button></Link>
+            <Link to={"/print/all"}><button style={{ padding: "10px 20px", margin: "0 1rem" }}>Print All</button></Link>
+            <Link to={"/print/cover"}><button style={{ padding: "10px 20px", margin: "0 1rem" }}>Print Cover</button></Link>
         </form>
         <br />
         <hr />

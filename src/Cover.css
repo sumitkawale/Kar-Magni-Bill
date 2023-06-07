@@ -1,0 +1,30 @@
+* {
+    margin    : 0;
+    padding   : 0;
+    box-sizing: border-box;
+}
+
+.coverPage {
+    /* border     : 2px solid red; */
+    height     : 100vh;
+    width      : 90%;
+    margin-left: auto;
+    display    : flex;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.paddingL5 {
+    padding-left: 5px;
+}
+
+.gap {
+    width: 2rem;
+}
+
+.coverPage table {
+    border-collapse: collapse;
+    width          : 100%;
+}

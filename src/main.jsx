@@ -5,6 +5,7 @@ import './index.css'
 import { RouterProvider, createHashRouter } from 'react-router-dom'
 import Form from './Form.jsx'
 import AllBills from './AllBills.jsx'
+import Cover from './Cover.jsx'
 
 const router = createHashRouter([
 	{
@@ -18,6 +19,10 @@ const router = createHashRouter([
 	{
 		path: "/print/all",
 		element: <AllBills />
+	},
+	{
+		path: "/print/cover",
+		element: <Cover />
 	},
 ])
 
