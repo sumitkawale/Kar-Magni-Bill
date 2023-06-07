@@ -5,6 +5,7 @@ import "./Form.css"
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Form() {
+    const [workbook, updateWorkbook] = useState({})
     const [data, updateData] = useState(JSON.parse(localStorage.getItem("tableData")) || [])
     const [loadingStatus, updateLoadingStatus] = useState(false)
 
@@ -31,20 +32,8 @@ export default function Form() {
         const reader = new FileReader();
         reader.readAsBinaryString(e.target.files[0]);
         reader.onload = (e) => {
-            const workbook = XLSX.read(e.target.result, { type: "binary" });
-            console.log("workbook:", workbook)
-            const sheetName = workbook.SheetNames[2] || 0;
-            console.log("sheetName:", sheetName)
-            const sheet = workbook.Sheets[sheetName];
-            console.log("sheet:", sheet)
-            const parsedData = XLSX.utils.sheet_to_json(sheet);
-
-            let data = parsedData.filter((row) => Object.keys(row).length == 19)
-            updateData(data)
-
-            localStorage.setItem("tableData", JSON.stringify(data))
-
-            updateLoadingStatus(false)
+            updateWorkbook(XLSX.read(e.target.result, { type: "binary" }));
+            console.log("workbook SheetNames:", workbook.SheetNames)
         }
     }
 
@@ -60,11 +49,40 @@ export default function Form() {
         }
     }
 
+    function sheetChange(event) {
+        const sheetName = workbook.SheetNames[event.target.value] || 0;
+
+        console.log("sheetName:", sheetName)
+        const sheet = workbook.Sheets[sheetName];
+        console.log("sheet:", sheet)
+        const parsedData = XLSX.utils.sheet_to_json(sheet);
+
+        let data = parsedData.filter((row) => Object.keys(row).length == 19)
+        updateData(data)
+
+        localStorage.setItem("tableData", JSON.stringify(data))
+
+        updateLoadingStatus(false)
+    }
+
 
     return <>
         <form>
             <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} id='fileInput' />
-            <button type='reset' onClick={() => { localStorage.removeItem("tableData"); updateData([]) }}>reset</button>
+            {
+                workbook.SheetNames &&
+                <>
+                    <select onChange={sheetChange}>
+                        {
+                            workbook?.SheetNames?.map((name, index) => {
+                                console.log(name)
+                                return <option key={name} value={index}>{name}</option>
+                            })
+                        }
+                    </select>
+                </>
+            }
+            <button type='reset' style={{ margin: "0 2rem" }} onClick={() => { localStorage.removeItem("tableData"); updateData([]) }}>reset</button>
             <hr />
             <Link to={"/print/all"}><button style={{ padding: "10px 20px" }}>Print All</button></Link>
         </form>
