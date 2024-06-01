@@ -37,9 +37,9 @@ export default function Bill(props) {
                 <p className='english billNumber'>No. <span style={{ fontSize: "2rem" }}> {(Number.parseInt(data[0]) || 0) + 0}</span></p>
             </div>
             <p className="word-spacing">मुंबई ग्रामपंचायत कायदा १९५८ च्या कलम १२९(१) अन्वये</p>
-            <h2 className="text-justify word-spacing">ग्रामपंचायत अनाळा तालुका परांडा यांजकडून</h2>
-            <p>श्री./श्रीमती <span>{data[2] || <span style={{ padding: "0 6rem" }}></span>}</span> घर नं. <span>{data[1] || <span className="px-4"></span>}</span> यांस </p>
-            <p>टॅक्स फी अगर इतर येण्यासंबंधीचा तपशील सन - <strong className="english">2023</strong> - <strong className="english">2024</strong> सालाचे</p>
+            <h3 className="text-justify word-spacing">ग्रामपंचायत खासगाव तालुका परांडा यांजकडून</h3>
+            <p>श्री./श्रीमती <span>{data[2] || <span style={{ padding: "0 6rem"; margin-right:1rem; }}></span>}</span> घर नं. <span style="font-size:1.2rem">{data[1] || <span className="px-4"></span>}</span> यांस </p>
+            <p>टॅक्स फी अगर इतर येण्यासंबंधीचा तपशील सन - <strong className="english">2024</strong> - <strong className="english">2025</strong> सालाचे</p>
             <table border="1px">
                 <thead>
                     <tr>
