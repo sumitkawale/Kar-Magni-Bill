@@ -121,10 +121,10 @@ export default function Bill(props) {
                 २) पूर्ण आर्थिक वर्षात कराची  रक्कम न भरल्यास त्यापुढील वर्षी एकूण करास ५% दंड आकारन्यात येईल
             </p>
             <div style={{ marginTop: "2.5rem" }} className="flex justify-space-between">
-                <p>तारीख: 08/06/2023</p>
+                <p>तारीख: 07/06/2024</p>
                 <div>
                     <p style={{ textIndent: "1rem" }}>सरपंच / ग्रामसेवक</p>
-                    <p>ग्रा.पं अनाळा  तालुका परंडा</p>
+                    <p>ग्रा.पं खासगाव तालुका परंडा</p>
                 </div>
             </div>
         </div>

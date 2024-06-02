@@ -32,6 +32,10 @@
 	font-family: 'TiroDevanagariMarathi-Italic', serif;
 }
 
+.marathiNormal {
+	font-family: 'TiroDevanagariMarathi-Regular', serif;
+}
+
 .english {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
