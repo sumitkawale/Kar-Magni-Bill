@@ -2,6 +2,8 @@ import BillPage from "./BillPage"
 
 export default function AllBills() {
     const allData = JSON.parse(localStorage.getItem("tableData") || "[]");
+    const keyName = "basicDetails"
+    const basicDetails = JSON.parse(localStorage.getItem(keyName) || "{}");
 
     const dataInArray = allData.map((rows) => {
         return Object.entries(rows).map((row) => {
@@ -13,7 +15,7 @@ export default function AllBills() {
     return <>
         {
             dataInArray.map(row => {
-                return <BillPage data={row} />
+                return <BillPage data={row} basicDetails={basicDetails} />
             })
         }
     </>

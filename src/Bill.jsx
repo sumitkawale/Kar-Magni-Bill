@@ -25,6 +25,12 @@ function makeSolid(value) {
 
 export default function Bill(props) {
     let data = props.data ?? JSON.parse(useParams().data || "[]")
+    const keyName = "basicDetails"
+    let basicDetails = props?.basicDetails
+    if (!basicDetails) {
+        basicDetails = JSON.parse(localStorage.getItem(keyName) || "{}");
+        basicDetails = basicDetails ? basicDetails : {};
+    }
     // console.log(data)
 
     const magilBakiSum = makeDecimal(makeDecimal(data[3]) + makeDecimal(data[6]) + makeDecimal(data[9]) + makeDecimal(data[12]) + makeDecimal(data[15]));
@@ -37,9 +43,9 @@ export default function Bill(props) {
                 <p className='english billNumber'>No. <span style={{ fontSize: "2rem" }}> {(Number.parseInt(data[0]) || 0) + 0}</span></p>
             </div>
             <p className="word-spacing">मुंबई ग्रामपंचायत कायदा १९५८ च्या कलम १२९(१) अन्वये</p>
-            <h3 className="text-justify word-spacing">ग्रामपंचायत खासगाव तालुका परांडा यांजकडून</h3>
+            <h3 className="text-justify word-spacing">ग्रामपंचायत {basicDetails?.villageName || ""} तालुका {basicDetails?.taalukaName || "परंडा"} यांजकडून</h3>
             <p>श्री./श्रीमती <span style={{marginRight:"1rem" }}>{data[2] || <span style={{ padding: "0 6rem"}}></span>}</span> घर नं. <span style={{fontSize:"1.25rem", marginRight:"1rem"}}>{data[1] || <span className="px-4"></span>}</span> यांस </p>
-            <p>टॅक्स फी अगर इतर येण्यासंबंधीचा तपशील सन - <strong className="english">2024</strong> - <strong className="english">2025</strong> सालाचे</p>
+            <p>टॅक्स फी अगर इतर येण्यासंबंधीचा तपशील सन - <strong className="english">{basicDetails?.fromYear || ""}</strong> - <strong className="english">{basicDetails?.toYear || ""}</strong> सालाचे</p>
             <table border="1px">
                 <thead>
                     <tr>
@@ -121,10 +127,10 @@ export default function Bill(props) {
                 २) पूर्ण आर्थिक वर्षात कराची  रक्कम न भरल्यास त्यापुढील वर्षी एकूण करास ५% दंड आकारन्यात येईल
             </p>
             <div style={{ marginTop: "2.5rem" }} className="flex justify-space-between">
-                <p>तारीख: 07/06/2024</p>
+                <p>तारीख: {basicDetails?.date || ""}</p>
                 <div>
                     <p style={{ textIndent: "1rem" }}>सरपंच / ग्रामसेवक</p>
-                    <p>ग्रा.पं खासगाव तालुका परंडा</p>
+                    <p>ग्रा.पं {basicDetails?.villageName || ""} तालुका {basicDetails?.taalukaName || "परंडा"}</p>
                 </div>
             </div>
         </div>

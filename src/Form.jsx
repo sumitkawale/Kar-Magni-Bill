@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx'
 import "./Form.css"
 
@@ -8,6 +8,13 @@ export default function Form() {
     const [workbook, updateWorkbook] = useState({})
     const [data, updateData] = useState(JSON.parse(localStorage.getItem("tableData")) || [])
     const [loadingStatus, updateLoadingStatus] = useState(false)
+    const [basicDetails, updateBasicDetails] = useState({
+        villageName: "",
+        taalukaName: "",
+        date: "",
+        fromYear: "",
+        toYear: ""
+    })
 
     const navigate = useNavigate()
 
@@ -37,6 +44,36 @@ export default function Form() {
         }
     }
 
+    const updateFormDetails = (e) => {
+        const value = e.target.value;
+        const key = e.target.id;
+        updateBasicDetails(prev => {
+            return {
+                ...prev,
+                [key]:value
+            }
+        })
+        const keyName = "basicDetails"
+        const details = {
+            ...basicDetails,
+            [key]:value
+        }
+        localStorage.setItem(keyName, JSON.stringify(details))
+    }
+
+    useEffect(() => {
+        const keyName = "basicDetails"
+        try {
+            const data = localStorage.getItem(keyName) || "{}";
+            const parsedData = JSON.parse(data);
+            if (parsedData) {
+                updateBasicDetails(parsedData)
+            }
+        } catch {
+            //
+        }
+    }, [])
+
     function printData(e) {
         const tr = e.target.parentNode
         const rowData = [...tr.cells].map((cell) => {
@@ -52,13 +89,14 @@ export default function Form() {
     function sheetChange(event) {
         const sheetName = workbook.SheetNames[event.target.value] || 0;
 
-        // console.log("sheetName:", sheetName)
+        console.log("sheetName:", sheetName)
         const sheet = workbook.Sheets[sheetName];
-        // console.log("sheet:", sheet)
+        console.log("sheet:", sheet)
         const parsedData = XLSX.utils.sheet_to_json(sheet);
 
         let data = parsedData.filter((row) => Object.keys(row).length == 19)
         updateData(data)
+        console.log({data})
 
         localStorage.setItem("tableData", JSON.stringify(data))
 
@@ -83,6 +121,43 @@ export default function Form() {
                 </>
             }
             <button type='reset' style={{ margin: "0 2rem" }} onClick={() => { localStorage.removeItem("tableData"); updateData([]) }}>reset</button>
+            <hr />
+            <input 
+                type='text'
+                value={basicDetails?.villageName || ""}
+                placeholder='village name' 
+                onChange={updateFormDetails} 
+                id='villageName' 
+            />
+            <input 
+                type='text'
+                value={basicDetails?.taalukaName || ""}
+                placeholder='परंडा / change name' 
+                onChange={updateFormDetails} 
+                id='taalukaName' 
+            />
+            <input 
+                type='text'
+                value={basicDetails?.date || ""}
+                placeholder='enter date' 
+                onChange={updateFormDetails} 
+                id='date' 
+            />
+            <hr />
+            <input 
+                type='text'
+                value={basicDetails?.fromYear || ""}
+                placeholder='from year' 
+                onChange={updateFormDetails} 
+                id='fromYear' 
+            />
+            <input 
+                type='text'
+                value={basicDetails?.toYear || ""}
+                placeholder='to year' 
+                onChange={updateFormDetails} 
+                id='toYear' 
+            />
             <hr />
             <Link to={"/print/all"}><button style={{ padding: "10px 20px", margin: "0 1rem" }}>Print All</button></Link>
             <Link to={"/print/cover"}><button style={{ padding: "10px 20px", margin: "0 1rem" }}>Print Cover</button></Link>
